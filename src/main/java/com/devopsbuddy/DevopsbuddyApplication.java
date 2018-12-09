@@ -31,14 +31,14 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 	//@Autowired
 	//private PlanService planService;
 
-	/*@Value("${webmaster.username}")
+	@Value("${webmaster.username}")
 	private String webmasterUsername;
 
 	@Value("${webmaster.password}")
 	private String webmasterPassword;
 
 	@Value("${webmaster.email}")
-	private String webmasterEmail;*/
+	private String webmasterEmail;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DevopsbuddyApplication.class, args);
@@ -47,17 +47,18 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		String username = "Anand";
-		String email = "azaveri7@gmail.com";
+		/*String username = "Anand";
+		String email = "azaveri7@gmail.com";*/
 		
 		LOG.info("Creating Basic and Pro plans in the database...");
 		//planService.createPlan(PlansEnum.BASIC.getId());
 		//planService.createPlan(PlansEnum.PRO.getId());
 
-		User user = UserUtils.createBasicUser(username, email);
-		//user.setPassword(webmasterPassword);
+		//User user = UserUtils.createBasicUser(username, email);
+		User user = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
+		user.setPassword(webmasterPassword);
 		Set<UserRole> userRoles = new HashSet<>();
-		userRoles.add(new UserRole(user, new Role(RolesEnum.BASIC)));
+		userRoles.add(new UserRole(user, new Role(RolesEnum.ADMIN)));
 		LOG.debug("Creating user with username {}", user.getUsername());
 		userService.createUser(user, PlansEnum.PRO, userRoles);
 		LOG.info("User {} created", user.getUsername());
