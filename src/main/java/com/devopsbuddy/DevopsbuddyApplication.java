@@ -51,7 +51,7 @@ public class DevopsbuddyApplication implements CommandLineRunner {
 		//planService.createPlan(PlansEnum.BASIC.getId());
 		//planService.createPlan(PlansEnum.PRO.getId());
 
-		User user = UserUtils.createBasicUser("Anand", "azaveri@gmail.com");
+		User user = UserUtils.createBasicUser("Anand", "azaveri7@gmail.com");
 		//user.setPassword(webmasterPassword);
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user, new Role(RolesEnum.BASIC)));

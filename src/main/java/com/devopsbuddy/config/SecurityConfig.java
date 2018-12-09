@@ -2,9 +2,9 @@ package com.devopsbuddy.config;
 
 import java.util.*;
 
-/*import com.devopsbuddy.backend.service.UserSecurityService;
-import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
-import com.devopsbuddy.web.controllers.SignupController;*/
+import com.devopsbuddy.backend.service.UserSecurityService;
+//import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+//import com.devopsbuddy.web.controllers.SignupController;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -20,8 +20,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //@Autowired
-    //private UserSecurityService userSecurityService;
+    @Autowired
+    private UserSecurityService userSecurityService;
 	
 	@Autowired
 	private Environment env;
@@ -89,9 +89,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }*/
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userSecurityService);                
+    }
+    /*@Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     	auth
     		.inMemoryAuthentication()
     		.withUser("user").password("password")
     		.roles("USER");
-    }
+    }*/
 }

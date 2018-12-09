@@ -98,6 +98,13 @@ public class RepositoriesIntegrationTest {
 		}
 	}
 	
+	@Test
+	public void testDeleteUser() {
+		User basicUser = createBasicUser();
+		userRepository.save(basicUser);
+		userRepository.delete(basicUser.getId());
+	}
+	
 	private Plan createBasicPlan() {
 		Plan plan = new Plan();
 		plan.setId(BASIC_PLAN_ID);
