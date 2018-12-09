@@ -34,8 +34,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    //@Autowired
-    //private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     //@Autowired
     //private PasswordResetTokenRepository passwordResetTokenRepository;
@@ -84,6 +84,8 @@ public class UserService {
     
     @Transactional
     public User createUser(User user, PlansEnum plansEnum, Set<UserRole> userRoles) {
+    	String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPassword);
         Plan plan = new Plan(plansEnum);
         if (!planRepository.exists(plansEnum.getId())) {
         	plan = planRepository.save(plan);
