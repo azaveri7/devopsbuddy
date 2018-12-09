@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by tedonema on 28/03/2016.
+ * Created by Zaveria on 10/12/2018.
  */
 @Entity
 public class User implements Serializable, UserDetails {
@@ -70,7 +70,7 @@ public class User implements Serializable, UserDetails {
             fetch = FetchType.LAZY,
             mappedBy = "user"
     )
-   /* private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
+    private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
 
     public Set<PasswordResetToken> getPasswordResetTokens() {
         return passwordResetTokens;
@@ -78,7 +78,7 @@ public class User implements Serializable, UserDetails {
 
     public void setPasswordResetTokens(Set<PasswordResetToken> passwordResetTokens) {
         this.passwordResetTokens = passwordResetTokens;
-    }*/
+    }
 
     public long getId() {
         return id;
