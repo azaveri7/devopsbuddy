@@ -28,16 +28,17 @@ import java.util.Set;
 @SpringApplicationConfiguration(DevopsbuddyApplication.class)
 public class UserServiceIntegrationTest {
 
-    //@Rule public TestName testName = new TestName();
+    @Rule public TestName testName = new TestName();
 
 	@Autowired
 	private UserService userService;
 	
     @Test
     public void testCreateNewUser() throws Exception {
-
+    	String username = testName.getMethodName();
+    	String email = testName.getMethodName() + "@gmail.com";
         Set<UserRole> userRoles = new HashSet<>();
-        User basicUser = UserUtils.createBasicUser("Anand01","azaveri7@gmail.com");
+        User basicUser = UserUtils.createBasicUser(username, email);
         userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
         
         User user = this.userService.createUser(basicUser, PlansEnum.BASIC, 
