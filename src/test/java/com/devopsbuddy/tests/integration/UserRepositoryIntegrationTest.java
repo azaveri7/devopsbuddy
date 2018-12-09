@@ -1,4 +1,4 @@
-/*package com.devopsbuddy.test.integration;
+package com.devopsbuddy.tests.integration;
 
 import com.devopsbuddy.DevopsbuddyApplication;
 import com.devopsbuddy.backend.persistence.domain.backend.Plan;
@@ -25,9 +25,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-*//**
+/**
  * Created by tedonema on 29/03/2016.
- *//*
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DevopsbuddyApplication.class)
 public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
@@ -117,4 +117,4 @@ public class UserRepositoryIntegrationTest extends AbstractIntegrationTest {
 
     }
 
-}*/
+}
