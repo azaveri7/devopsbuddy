@@ -1,5 +1,7 @@
 package com.devopsbuddy.config;
 
+import java.util.*;
+
 /*import com.devopsbuddy.backend.service.UserSecurityService;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
 import com.devopsbuddy.web.controllers.SignupController;*/
@@ -20,6 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //@Autowired
     //private UserSecurityService userSecurityService;
+	
+	@Autowired
+	private Environment env;
 
 	/*@Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -49,8 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/",
             "/about/**",
             "/contact/**",
-            "/error/**/*"
-            //"/console/**"
+            "/error/**/*",
+            "/console/**"
             //ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
             //ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
             //SignupController.SIGNUP_URL_MAPPING
@@ -59,11 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        /*List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
+        List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
         if (activeProfiles.contains("dev")) {
             http.csrf().disable();
             http.headers().frameOptions().disable();
-        }*/
+        }
 
         http
                 .authorizeRequests()
