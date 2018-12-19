@@ -1,13 +1,16 @@
 package com.devopsbuddy.utils;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 //import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
 //import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
+import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
 
 //import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by tedonema on 30/03/2016.
+ * Created by Zaveria on 30/03/2016.
  */
 public class UserUtils {
 
@@ -47,7 +50,7 @@ public class UserUtils {
      * @param userId The user id
      * @param token The token
      * @return the URL to reset the user password.
-     *//*
+     */
     public static String createPasswordResetUrl(HttpServletRequest request, long userId, String token) {
         String passwordResetUrl =
                 request.getScheme() +
@@ -65,7 +68,7 @@ public class UserUtils {
         return passwordResetUrl;
     }
 
-    public static <T extends BasicAccountPayload> User fromWebUserToDomainUser(T frontendPayload) {
+    /*public static <T extends BasicAccountPayload> User fromWebUserToDomainUser(T frontendPayload) {
         User user = new User();
         user.setUsername(frontendPayload.getUsername());
         user.setPassword(frontendPayload.getPassword());
