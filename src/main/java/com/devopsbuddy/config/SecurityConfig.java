@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.devopsbuddy.backend.service.UserSecurityService;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+import com.devopsbuddy.web.controllers.SignupController;
 
 //import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
 //import com.devopsbuddy.web.controllers.SignupController;*/
@@ -64,8 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/error/**/*",
             "/console/**",
             ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
-            //ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
-            //SignupController.SIGNUP_URL_MAPPING
+            ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
+            SignupController.SIGNUP_URL_MAPPING
     };
 
     @Override
