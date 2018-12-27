@@ -1,4 +1,4 @@
-package com.devopsbuddy.tests.integration;
+package com.devopsbuddy.test.integration;
 
 import org.junit.Assert;
 import org.junit.Rule;

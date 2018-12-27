@@ -1,4 +1,4 @@
-package com.devopsbuddy.tests.integration;
+package com.devopsbuddy.test.integration;
 
 import com.devopsbuddy.DevopsbuddyApplication;
 import com.devopsbuddy.backend.persistence.domain.backend.PasswordResetToken;

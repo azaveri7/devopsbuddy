@@ -6,6 +6,7 @@ import com.devopsbuddy.backend.persistence.domain.backend.User;
 //import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
 //import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
 import com.devopsbuddy.web.controllers.ForgotMyPasswordController;
+import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
 
 //import javax.servlet.http.HttpServletRequest;
 
@@ -68,7 +69,7 @@ public class UserUtils {
         return passwordResetUrl;
     }
 
-    /*public static <T extends BasicAccountPayload> User fromWebUserToDomainUser(T frontendPayload) {
+    public static <T extends BasicAccountPayload> User fromWebUserToDomainUser(T frontendPayload) {
         User user = new User();
         user.setUsername(frontendPayload.getUsername());
         user.setPassword(frontendPayload.getPassword());
@@ -81,5 +82,5 @@ public class UserUtils {
         user.setDescription(frontendPayload.getDescription());
 
         return user;
-    }*/
+    }
 }

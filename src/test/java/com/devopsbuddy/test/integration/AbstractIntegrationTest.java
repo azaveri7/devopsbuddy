@@ -1,4 +1,4 @@
-package com.devopsbuddy.tests.integration;
+package com.devopsbuddy.test.integration;
 
 import com.devopsbuddy.backend.persistence.domain.backend.Plan;
 import com.devopsbuddy.backend.persistence.domain.backend.Role;
