@@ -4,7 +4,7 @@ import com.devopsbuddy.backend.persistence.domain.backend.Plan;
 import com.devopsbuddy.backend.persistence.domain.backend.Role;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
-//import com.devopsbuddy.backend.service.PlanService;
+import com.devopsbuddy.backend.service.PlanService;
 //import com.devopsbuddy.backend.service.S3Service;
 //import com.devopsbuddy.backend.service.StripeService;
 import com.devopsbuddy.backend.service.UserService;
@@ -14,8 +14,8 @@ import com.devopsbuddy.enums.RolesEnum;
 //import com.devopsbuddy.exceptions.StripeException;
 //import com.devopsbuddy.utils.StripeUtils;
 import com.devopsbuddy.utils.UserUtils;
-//import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
-//import com.devopsbuddy.web.domain.frontend.ProAccountPayload;
+import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
+import com.devopsbuddy.web.domain.frontend.ProAccountPayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +37,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 /**
- * Created by Zaveria on 26/04/2016.
+ * Created by Zaveria on 27/12/2018.
  */
 @Controller
-public class SignupController {
+public class    SignupController {
 
-    /*@Autowired
-    private PlanService planService;*/
+    @Autowired
+    private PlanService planService;
 
     @Autowired
     private UserService userService;
@@ -79,12 +79,12 @@ public class SignupController {
         if (planId != PlansEnum.BASIC.getId() && planId != PlansEnum.PRO.getId()) {
             throw new IllegalArgumentException("Plan id is not valid");
         }
-        //model.addAttribute(PAYLOAD_MODEL_KEY_NAME, new ProAccountPayload());
+        model.addAttribute(PAYLOAD_MODEL_KEY_NAME, new ProAccountPayload());
 
         return SUBSCRIPTION_VIEW_NAME;
     }
 
-    /*@RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
+    @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
     public String signUpPost(@RequestParam(name = "planId", required = true) int planId,
                              @RequestParam(name = "file", required = false) MultipartFile file,
                              @ModelAttribute(PAYLOAD_MODEL_KEY_NAME) @Valid ProAccountPayload payload,
@@ -130,13 +130,13 @@ public class SignupController {
         // Stores the profile image on Amazon S3 and stores the URL in the user's record
         if (file != null && !file.isEmpty()) {
 
-            String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
+            /*String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
             if (profileImageUrl != null) {
                 user.setProfileImageUrl(profileImageUrl);
             } else {
                 LOG.warn("There was a problem uploading the profile image to S3. The user's profile will" +
                         " be created without the image");
-            }
+            }*/
 
         }
 
@@ -175,7 +175,7 @@ public class SignupController {
 
             // If the user has selected the pro account, creates the Stripe customer to store the stripe customer id in
             // the db
-            Map<String, Object> stripeTokenParams = StripeUtils.extractTokenParamsFromSignupPayload(payload);
+            /*Map<String, Object> stripeTokenParams = StripeUtils.extractTokenParamsFromSignupPayload(payload);
 
             Map<String, Object> customerParams = new HashMap<String, Object>();
             customerParams.put("description", "DevOps Buddy customer. Username: " + payload.getUsername());
@@ -187,7 +187,7 @@ public class SignupController {
 
             user.setStripeCustomerId(stripeCustomerId);
 
-            registeredUser = userService.createUser(user, PlansEnum.PRO, roles);
+            registeredUser = userService.createUser(user, PlansEnum.PRO, roles);*/
             LOG.debug(payload.toString());
         }
 
@@ -204,7 +204,7 @@ public class SignupController {
         return SUBSCRIPTION_VIEW_NAME;
     }
 
-    @ExceptionHandler({StripeException.class, S3Exception.class})
+    //@ExceptionHandler({StripeException.class, S3Exception.class})
     public ModelAndView signupException(HttpServletRequest request, Exception exception) {
 
         LOG.error("Request {} raised exception {}", request.getRequestURL(), exception);
@@ -220,10 +220,10 @@ public class SignupController {
 
     //--------------> Private methods
 
-    *//**
+    /**
      * Checks if the username/email are duplicates and sets error flags in the model.
      * Side effect: the method might set attributes on Model
-     **//*
+     **/
     private void checkForDuplicates(BasicAccountPayload payload, ModelMap model) {
 
         // Username
@@ -234,5 +234,5 @@ public class SignupController {
             model.addAttribute(DUPLICATED_EMAIL_KEY, true);
         }
 
-    }*/
+    }
 }
