@@ -1,12 +1,12 @@
 package com.devopsbuddy.backend.service;
 
 import com.devopsbuddy.backend.persistence.domain.backend.PasswordResetToken;
-//import com.devopsbuddy.backend.persistence.domain.backend.PasswordResetToken;
+import com.devopsbuddy.backend.persistence.domain.backend.PasswordResetToken;
 import com.devopsbuddy.backend.persistence.domain.backend.Plan;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
 import com.devopsbuddy.backend.persistence.repositories.PasswordResetTokenRepository;
-//import com.devopsbuddy.backend.persistence.repositories.PasswordResetTokenRepository;
+import com.devopsbuddy.backend.persistence.repositories.PasswordResetTokenRepository;
 import com.devopsbuddy.backend.persistence.repositories.PlanRepository;
 import com.devopsbuddy.backend.persistence.repositories.RoleRepository;
 import com.devopsbuddy.backend.persistence.repositories.UserRepository;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 /**
- * Created by tedonema on 30/03/2016.
+ * Created by Zaveria on 28/12/2018.
  */
 @Service
 @Transactional(readOnly = true)
@@ -45,7 +45,7 @@ public class UserService {
     /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
-    /*@Transactional
+    @Transactional
     public User createUser(User user, PlansEnum plansEnum, Set<UserRole> userRoles) {
 
         User localUser = userRepository.findByEmail(user.getEmail());
@@ -78,29 +78,11 @@ public class UserService {
 
         return localUser;
 
-    }*/
+    }
     
     public void delete() {
     	userRepository.deleteAll();
-    }
-    
-    @Transactional
-    public User createUser(User user, PlansEnum plansEnum, Set<UserRole> userRoles) {
-    	String encryptedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encryptedPassword);
-        Plan plan = new Plan(plansEnum);
-        if (!planRepository.exists(plansEnum.getId())) {
-        	plan = planRepository.save(plan);
-        }
-        user.setPlan(plan);
-        for (UserRole ur : userRoles) {
-            roleRepository.save(ur.getRole());
-        }
-        user.getUserRoles().addAll(userRoles);
-        user = userRepository.save(user);
-        return user;
-    }
-    
+    }    
     
     /**
      * Returns a user by username or null if a user could not be found.
