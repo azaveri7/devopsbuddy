@@ -5,13 +5,13 @@ import com.devopsbuddy.backend.persistence.domain.backend.Role;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
 import com.devopsbuddy.backend.service.PlanService;
-//import com.devopsbuddy.backend.service.S3Service;
+import com.devopsbuddy.backend.service.S3Service;
 //import com.devopsbuddy.backend.service.StripeService;
 import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
-//import com.devopsbuddy.exceptions.S3Exception;
-//import com.devopsbuddy.exceptions.StripeException;
+import com.devopsbuddy.exceptions.S3Exception;
+import com.devopsbuddy.exceptions.StripeException;
 //import com.devopsbuddy.utils.StripeUtils;
 import com.devopsbuddy.utils.UserUtils;
 import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
@@ -48,10 +48,10 @@ public class    SignupController {
     @Autowired
     private UserService userService;
 
-    /*@Autowired
+    @Autowired
     private S3Service s3Service;
 
-    @Autowired
+    /*@Autowired
     private StripeService stripeService;*/
 
     /** The application logger */
@@ -130,13 +130,13 @@ public class    SignupController {
         // Stores the profile image on Amazon S3 and stores the URL in the user's record
         if (file != null && !file.isEmpty()) {
 
-            /*String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
+            String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
             if (profileImageUrl != null) {
                 user.setProfileImageUrl(profileImageUrl);
             } else {
                 LOG.warn("There was a problem uploading the profile image to S3. The user's profile will" +
                         " be created without the image");
-            }*/
+            }
 
         }
 
@@ -204,7 +204,7 @@ public class    SignupController {
         return SUBSCRIPTION_VIEW_NAME;
     }
 
-    //@ExceptionHandler({StripeException.class, S3Exception.class})
+    @ExceptionHandler({StripeException.class, S3Exception.class})
     public ModelAndView signupException(HttpServletRequest request, Exception exception) {
 
         LOG.error("Request {} raised exception {}", request.getRequestURL(), exception);
