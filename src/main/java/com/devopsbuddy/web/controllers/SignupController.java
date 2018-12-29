@@ -6,13 +6,13 @@ import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
 import com.devopsbuddy.backend.service.PlanService;
 import com.devopsbuddy.backend.service.S3Service;
-//import com.devopsbuddy.backend.service.StripeService;
+import com.devopsbuddy.backend.service.StripeService;
 import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
 import com.devopsbuddy.exceptions.S3Exception;
 import com.devopsbuddy.exceptions.StripeException;
-//import com.devopsbuddy.utils.StripeUtils;
+import com.devopsbuddy.utils.StripeUtils;
 import com.devopsbuddy.utils.UserUtils;
 import com.devopsbuddy.web.domain.frontend.BasicAccountPayload;
 import com.devopsbuddy.web.domain.frontend.ProAccountPayload;
@@ -51,8 +51,8 @@ public class    SignupController {
     @Autowired
     private S3Service s3Service;
 
-    /*@Autowired
-    private StripeService stripeService;*/
+    @Autowired
+    private StripeService stripeService;
 
     /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(SignupController.class);
@@ -175,7 +175,7 @@ public class    SignupController {
 
             // If the user has selected the pro account, creates the Stripe customer to store the stripe customer id in
             // the db
-            /*Map<String, Object> stripeTokenParams = StripeUtils.extractTokenParamsFromSignupPayload(payload);
+            Map<String, Object> stripeTokenParams = StripeUtils.extractTokenParamsFromSignupPayload(payload);
 
             Map<String, Object> customerParams = new HashMap<String, Object>();
             customerParams.put("description", "DevOps Buddy customer. Username: " + payload.getUsername());
@@ -187,7 +187,7 @@ public class    SignupController {
 
             user.setStripeCustomerId(stripeCustomerId);
 
-            registeredUser = userService.createUser(user, PlansEnum.PRO, roles);*/
+            registeredUser = userService.createUser(user, PlansEnum.PRO, roles);
             LOG.debug(payload.toString());
         }
 
