@@ -151,6 +151,7 @@ public class S3Service {
 
             AccessControlList acl = new AccessControlList();
             acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
+            acl.grantPermission(GroupGrantee.AuthenticatedUsers, Permission.Write);
 
             String key = username + "/" + PROFILE_PICTURE_FILE_NAME + "." + FilenameUtils.getExtension(resource.getName());
 
