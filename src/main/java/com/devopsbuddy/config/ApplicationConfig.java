@@ -21,7 +21,7 @@ import com.amazonaws.regions.Regions;
 @PropertySource("file:///${user.home}/logs/config/application-common.properties")
 public class ApplicationConfig {
 	
-	@Value("{aws.s3.profile}")
+	@Value("${aws.s3.profile}")
 	private String awsProfileName;
 	
 	@Bean
@@ -29,7 +29,7 @@ public class ApplicationConfig {
 		AWSCredentials credentials = new ProfileCredentialsProvider(awsProfileName)
 				.getCredentials();
 		AmazonS3Client s3Client = new AmazonS3Client(credentials);
-		com.amazonaws.regions.Region region = Region.getRegion(Regions.EU_WEST_1);
+		com.amazonaws.regions.Region region = Region.getRegion(Regions.US_EAST_1);
 		s3Client.setRegion(region);
 		return s3Client;
 		
