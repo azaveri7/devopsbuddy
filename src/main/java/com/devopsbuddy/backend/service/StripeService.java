@@ -20,7 +20,7 @@ public class StripeService {
     /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(StripeService.class);
 
-    @Autowired
+    //@Autowired
     private String stripeKey;
 
     /**
